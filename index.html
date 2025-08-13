@@ -1577,36 +1577,156 @@
     <div id="homepage">
         <!-- Enhanced Hero Section -->
         <section class="hero">
-            <div class="hero-background"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-particles" id="heroParticles"></div>
-            <div class="hero-content">
-                <h1>Discover Kenya's Wild Beauty</h1>
-                <p class="subtitle">Unforgettable adventures across East Africa's most spectacular landscapes and hidden treasures</p>
-                <div class="hero-actions">
-                    <a href="#" class="btn btn-glass" onclick="openModal('signupModal')">
-                        <i class="fas fa-compass"></i> Start Your Journey
-                    </a>
-                    <a href="#activities" class="btn btn-outline btn-glass">
-                        <i class="fas fa-play"></i> Explore Adventures
-                    </a>
-                </div>
-            </div>
-            <div class="floating-stats">
-                <div class="stat-item">
-                    <span class="stat-number" id="heroTotalTours">12+</span>
-                    <span class="stat-label">Epic Adventures</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="heroHappyCustomers">500+</span>
-                    <span class="stat-label">Happy Travelers</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="heroExperience">5+</span>
-                    <span class="stat-label">Years Experience</span>
-                </div>
-            </div>
-        </section>
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline class="hero-video">
+        <source src="Assets/Videos/Background.mp4" type="video/mp4">
+        <!-- Optional: fallback text -->
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Particles -->
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <!-- Content -->
+    <div class="hero-content">
+        <h1>Discover Kenya's Wild Beauty</h1>
+        <p class="subtitle">Unforgettable adventures across East Africa's most spectacular landscapes and hidden treasures</p>
+        <div class="hero-actions">
+            <a href="#" class="btn btn-glass" onclick="openModal('signupModal')">
+                <i class="fas fa-compass"></i> Start Your Journey
+            </a>
+            <a href="#activities" class="btn btn-outline btn-glass">
+                <i class="fas fa-play"></i> Explore Adventures
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Stats -->
+    <div class="floating-stats">
+        <div class="stat-item">
+            <span class="stat-number" id="heroTotalTours">12+</span>
+            <span class="stat-label">Epic Adventures</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="heroHappyCustomers">500+</span>
+            <span class="stat-label">Happy Travelers</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" id="heroExperience">5+</span>
+            <span class="stat-label">Years Experience</span>
+        </div>
+    </div>
+    <style>
+        /* Hero Section Base */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+}
+
+/* Video Background */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* Behind overlay */
+}
+
+/* Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45); /* Dark tint */
+    z-index: -1;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.hero-content .subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.hero-actions .btn {
+    margin: 0 10px;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-glass {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.7);
+    color: #fff;
+}
+
+.btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* Floating Stats */
+.floating-stats {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 40px;
+    z-index: 2;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+    </style>
+</section>
 
         <!-- Enhanced Activities Section -->
         <section class="activities-section" id="activities">
