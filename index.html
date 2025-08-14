@@ -6,1544 +6,18 @@
     <title>Zetu Adventures - Discover Kenya's Hidden Gems</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #1e3a8a;
-            --primary-dark: #1e40af;
-            --secondary: #065f46;
-            --accent: #10b981;
-            --success: #059669;
-            --danger: #dc2626;
-            --warning: #d97706;
-            --info: #0284c7;
-            --light: #f8fafc;
-            --dark: #1f2937;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            --gradient-hover: linear-gradient(135deg, var(--primary-dark), var(--secondary), var(--accent));
-            --glass: rgba(255, 255, 255, 0.1);
-            --shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
-            --shadow-hover: 0 20px 60px rgba(30, 58, 138, 0.2);
-            --border-radius: 20px;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            overflow-x: hidden;
-            background: var(--light);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient);
-            border-radius: 10px;
-            border: 2px solid var(--light);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gradient-hover);
-        }
-
-        /* Floating Elements Animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(30, 58, 138, 0.1);
-            transition: var(--transition);
-        }
-
-        header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            animation: pulse 3s infinite;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 1.05rem;
-            position: relative;
-            transition: var(--transition);
-            padding: 0.5rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: var(--gradient);
-            transition: all 0.3s ease;
-            border-radius: 2px;
-            transform: translateX(-50%);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            font-family: inherit;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary {
-            background: var(--gradient);
-            color: var(--white);
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.4);
-            background: var(--gradient-hover);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
-        }
-
-        .btn-glass {
-            background: var(--glass);
-            color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(15px);
-        }
-
-        .btn-glass:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Hero Section with Enhanced Video */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            overflow: hidden;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            z-index: -2;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(30, 58, 138, 0.8) 0%, 
-                rgba(6, 95, 70, 0.7) 50%, 
-                rgba(16, 185, 129, 0.6) 100%);
-            z-index: -1;
-        }
-
-        .hero-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 2;
-            animation: heroFadeIn 2s ease-out;
-            position: relative;
-        }
-
-        .hero-content::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            right: -50px;
-            bottom: -50px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulse 4s infinite;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #ffffff, #e0f2fe, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-content .subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 400;
-            margin-bottom: 3rem;
-            opacity: 0.95;
-            text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .hero-actions .btn {
-            font-size: 1.1rem;
-            padding: 1.2rem 3rem;
-            min-width: 200px;
-            font-weight: 700;
-        }
-
-        @keyframes heroFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Enhanced Floating Stats */
-        .floating-stats {
-            position: absolute;
-            bottom: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 3rem;
-            z-index: 3;
-        }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            padding: 2rem 2.5rem;
-            border-radius: var(--border-radius);
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.8s;
-        }
-
-        .stat-item:hover::before {
-            left: 100%;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        /* Enhanced Activities Grid Section */
-        .activities-section {
-            padding: 8rem 0;
-            background: var(--light);
-            position: relative;
-        }
-
-        .activities-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(180deg, rgba(30, 58, 138, 0.05) 0%, transparent 100%);
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 6rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--gradient);
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            font-size: 1.4rem;
-            color: #64748b;
-            font-weight: 400;
-            line-height: 1.7;
-        }
-
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
-            margin-bottom: 5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .activity-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            border: 1px solid rgba(30, 58, 138, 0.1);
-        }
-
-        .activity-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .activity-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .activity-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .activity-image {
-            height: 300px;
-            background: var(--gradient);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .activity-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .activity-card:hover .activity-image img {
-            transform: scale(1.1);
-        }
-
-        .activity-image .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(30, 58, 138, 0.8), rgba(16, 185, 129, 0.6));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .activity-card:hover .activity-image .overlay {
-            opacity: 1;
-        }
-
-        .activity-image .icon {
-            font-size: 4rem;
-            color: var(--white);
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .activity-content {
-            padding: 2.5rem;
-        }
-
-        .activity-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .activity-description {
-            color: #64748b;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        .activity-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .activity-price {
-            font-size: 2.2rem;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .activity-duration {
-            background: rgba(30, 58, 138, 0.1);
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            color: var(--primary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .activity-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature-tag {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        /* Enhanced Calendar Section */
-        .calendar-section {
-            padding: 8rem 0;
-            background: var(--white);
-        }
-
-        .calendar-container {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 3rem;
-            box-shadow: var(--shadow);
-            max-width: 1000px;
-            margin: 0 auto;
-            border: 1px solid rgba(30, 58, 138, 0.1);
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-        }
-
-        .calendar-nav {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .calendar-nav button {
-            background: var(--gradient);
-            color: var(--white);
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.3rem;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
-        }
-
-        .calendar-nav button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-            background: #e2e8f0;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .calendar-day {
-            background: var(--white);
-            padding: 1.5rem 0.5rem;
-            text-align: center;
-            position: relative;
-            min-height: 120px;
-            transition: var(--transition);
-        }
-
-        .calendar-day.header {
-            background: var(--gradient);
-            color: var(--white);
-            font-weight: 700;
-            min-height: auto;
-            padding: 1.5rem 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .calendar-day.other-month {
-            background: #f8fafc;
-            color: #cbd5e1;
-        }
-
-        .calendar-day.today {
-            background: rgba(30, 58, 138, 0.1);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
-            margin: 2px;
-        }
-
-        .calendar-day:hover:not(.header) {
-            background: rgba(30, 58, 138, 0.05);
-            transform: scale(1.05);
-        }
-
-        .day-number {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .event-indicator {
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin: 3px auto;
-            animation: pulse 2s infinite;
-        }
-
-        .event-count {
-            background: var(--gradient);
-            color: var(--white);
-            border-radius: 15px;
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            position: absolute;
-            top: 8px;
-            right: 8px;
-        }
-
-        /* Enhanced Events List */
-        .upcoming-events {
-            margin-top: 5rem;
-        }
-
-        .events-list {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .event-card {
-            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border-left: 5px solid var(--primary);
-            transition: var(--transition);
-            box-shadow: 0 5px 20px rgba(30, 58, 138, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .event-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.05), transparent);
-            transition: left 0.6s;
-        }
-
-        .event-card:hover::before {
-            left: 100%;
-        }
-
-        .event-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow-hover);
-            transform: translateX(15px) scale(1.02);
-            border-left-color: var(--accent);
-        }
-
-        .event-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .event-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .event-date {
-            background: var(--gradient);
-            color: var(--white);
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
-        }
-
-        /* Enhanced Dashboard Styles */
-        .dashboard {
-            display: none;
-            padding: 8rem 0 3rem;
-            min-height: 100vh;
-            background: var(--light);
-        }
-
-        .dashboard-header {
-            background: linear-gradient(135deg, var(--white) 0%, #f8fafc 100%);
-            padding: 4rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(30, 58, 138, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dashboard-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .dashboard-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .dashboard-nav {
-            display: flex;
-            gap: 1rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .dashboard-tab {
-            padding: 1.2rem 2.5rem;
-            background: rgba(30, 58, 138, 0.1);
-            border: 2px solid transparent;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--primary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 1rem;
-        }
-
-        .dashboard-tab:hover {
-            background: rgba(30, 58, 138, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .dashboard-tab.active {
-            background: var(--gradient);
-            color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
-        }
-
-        .dashboard-section {
-            display: none;
-            background: var(--white);
-            padding: 4rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(30, 58, 138, 0.1);
-        }
-
-        .dashboard-section.active {
-            display: block;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Enhanced Form Styles */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 1.1rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1.5rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 15px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: var(--transition);
-            background: var(--white);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .image-upload {
-            border: 3px dashed #cbd5e1;
-            border-radius: 20px;
-            padding: 4rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: linear-gradient(135deg, #f8fafc 0%, var(--white) 100%);
-        }
-
-        .image-upload:hover {
-            border-color: var(--primary);
-            background: rgba(30, 58, 138, 0.05);
-            transform: scale(1.02);
-        }
-
-        .image-upload.dragover {
-            border-color: var(--accent);
-            background: rgba(16, 185, 129, 0.1);
-            transform: scale(1.05);
-        }
-
-        .upload-icon {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .image-preview {
-            max-width: 250px;
-            border-radius: 15px;
-            margin-top: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        /* Enhanced Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--white);
-            padding: 4rem;
-            border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            border: 1px solid rgba(30, 58, 138, 0.1);
-            animation: modalSlideIn 0.4s ease;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        .modal h2 {
-            margin-bottom: 2.5rem;
-            color: var(--dark);
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #94a3b8;
-            transition: var(--transition);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(148, 163, 184, 0.1);
-        }
-
-        .close:hover {
-            color: var(--danger);
-            background: rgba(220, 38, 38, 0.1);
-            transform: scale(1.1);
-        }
-
-        /* Enhanced Tables */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-top: 2rem;
-            border: 1px solid rgba(30, 58, 138, 0.1);
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: 2rem 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .data-table th {
-            background: var(--gradient);
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .data-table tr {
-            transition: var(--transition);
-        }
-
-        .data-table tr:hover {
-            background: rgba(30, 58, 138, 0.05);
-            transform: scale(1.01);
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background: rgba(217, 119, 6, 0.1);
-            color: var(--warning);
-            border: 1px solid rgba(217, 119, 6, 0.2);
-        }
-
-        .status-confirmed {
-            background: rgba(5, 150, 105, 0.1);
-            color: var(--success);
-            border: 1px solid rgba(5, 150, 105, 0.2);
-        }
-
-        .status-rejected {
-            background: rgba(220, 38, 38, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-        }
-
-        /* Enhanced Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-small {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.9rem;
-            border-radius: 10px;
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
-        }
-
-        .btn-success:hover {
-            background: #047857;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
-        }
-
-        .btn-danger:hover {
-            background: #b91c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
-        }
-
-        .btn-warning {
-            background: var(--warning);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
-        }
-
-        .btn-warning:hover {
-            background: #c2410c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
-        }
-
-        /* Enhanced Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-bottom: 4rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, var(--white) 0%, #f8fafc 100%);
-            padding: 3rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(30, 58, 138, 0.1);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient);
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(30, 58, 138, 0.05), transparent);
-            transition: left 0.6s;
-        }
-
-        .stat-card:hover::after {
-            left: 100%;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .stat-icon {
-            font-size: 4rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 0.8rem;
-        }
-
-        .stat-label {
-            font-size: 1.2rem;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        /* Enhanced Footer */
-        footer {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--dark));
-            color: var(--white);
-            padding: 6rem 0 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--gradient);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 5rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 2.5rem;
-            color: var(--white);
-        }
-
-        .footer-section p,
-        .footer-section li {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 1rem;
-            transition: var(--transition);
-        }
-
-        .footer-section ul li:hover {
-            transform: translateX(10px);
-        }
-
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-section a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-        }
-
-        .social-links a:hover {
-            background: var(--accent);
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-        }
-
-        /* Enhanced Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--dark);
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-
-            .auth-buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .floating-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-                position: static;
-                transform: none;
-                margin-top: 4rem;
-            }
-
-            .activities-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .activity-card {
-                margin: 0 0.5rem;
-            }
-
-            .calendar-header {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
-            }
-
-            .calendar-nav {
-                order: 2;
-            }
-
-            .dashboard-nav {
-                flex-direction: column;
-            }
-
-            .dashboard-header {
-                padding: 2rem;
-            }
-
-            .dashboard-title {
-                font-size: 2rem;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .data-table {
-                font-size: 0.85rem;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 1rem 0.8rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                padding: 2rem;
-                width: 95%;
-            }
-
-            .modal h2 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Enhanced Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 4px solid rgba(30, 58, 138, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Notification Enhancement */
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 2rem;
-            padding: 1.5rem 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            z-index: 3000;
-            font-weight: 600;
-            max-width: 450px;
-            transform: translateX(500px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .notification.success {
-            background: linear-gradient(135deg, var(--success), #047857);
-            color: var(--white);
-        }
-
-        .notification.error {
-            background: linear-gradient(135deg, var(--danger), #b91c1c);
-            color: var(--white);
-        }
-
-        .notification.warning {
-            background: linear-gradient(135deg, var(--warning), #c2410c);
-            color: var(--white);
-        }
-
-        .notification.info {
-            background: linear-gradient(135deg, var(--info), #0369a1);
-            color: var(--white);
-        }
-
-        /* Utilities */
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .mb-1 { margin-bottom: 1rem; }
-        .mb-2 { margin-bottom: 2rem; }
-        .mt-1 { margin-top: 1rem; }
-        .mt-2 { margin-top: 2rem; }
-        .fade-in { animation: fadeIn 0.6s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Enhanced Parallax Effect */
-        .parallax-element {
-            transition: transform 0.1s ease-out;
-        }
-
-        /* Glass-morphism Enhancement */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-
-        /* Enhanced Mobile Menu */
-        .mobile-menu {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--dark);
-                font-size: 1.8rem;
-                cursor: pointer;
-                padding: 0.5rem;
-            }
-        }
-    </style>
+    <link href="CSS/main.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <!-- Header -->
-    <header id="header">
+     <header id="header">
         <nav class="container">
-            <a href="#" class="logo" onclick="showHome()">Zetu Adventures</a>
+            <a href="#" class="logo" onclick="showHome()">
+    <img src="Assets/Images/Logo.jpg" alt="Zetu Adventures Logo">
+    Zetu Adventures
+</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#" onclick="showHome()"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#activities"><i class="fas fa-mountain"></i> Adventures</a></li>
@@ -1604,102 +78,61 @@
         </div>
     </div>
 
-    <!-- Floating Stats -->
-    <div class="floating-stats">
-        <div class="stat-item">
-            <span class="stat-number" id="heroTotalTours">12+</span>
-            <span class="stat-label">Epic Adventures</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number" id="heroHappyCustomers">500+</span>
-            <span class="stat-label">Happy Travelers</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number" id="heroExperience">5+</span>
-            <span class="stat-label">Years Experience</span>
-        </div>
-    </div>
-    <style>
-        /* Hero Section Base */
-.hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    color: #fff;
-    text-align: center;
-}
-
-/* Video Background */
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2; /* Behind overlay */
-}
-
-/* Overlay */
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.45); /* Dark tint */
-    z-index: -1;
-}
-
-/* Hero Content */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    padding: 0 20px;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
-
-.hero-content .subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-}
-
-/* Floating Stats */
-.floating-stats {
-    position: absolute;
-    bottom: 30px;
-    display: flex;
-    gap: 40px;
-    z-index: 2;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 1.5rem;
-    font-weight: bold;
-    display: block;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-    </style>
 </section>
+
+    <!-- Floating Stats -->
+     <section>
+    <div class="floating-stats">
+    <div class="stat-item">
+        <span class="stat-number" data-target="12" data-suffix="+">0</span>
+        <span class="stat-label">Epic Adventures</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number" data-target="500" data-suffix="+">0</span>
+        <span class="stat-label">Happy Travelers</span>
+    </div>
+    <div class="stat-item">
+        <span class="stat-number" data-target="5" data-suffix="+">0</span>
+        <span class="stat-label">Years Experience</span>
+    </div>
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll('.stat-number');
+    const speed = 200; // lower = faster
+
+    const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const count = +counter.innerText;
+
+        const increment = target / speed;
+
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(() => animateCounter(counter), 20);
+        } else {
+            counter.innerText = target + suffix;
+        }
+    };
+
+    // Optional: animate only when in view
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target); // run only once
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+});
+    </script>
+</section>
+
 
         <!-- Enhanced Activities Section -->
         <section class="activities-section" id="activities">
@@ -2603,7 +1036,7 @@
                     <div style="grid-column: 1 / -1; text-align: center; padding: 5rem;">
                         <i class="fas fa-mountain" style="font-size: 5rem; color: var(--primary); margin-bottom: 2rem; animation: float 3s ease-in-out infinite;"></i>
                         <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--dark);">No adventures yet</h3>
-                        <p style="font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;">Epic adventures are being prepared. Check back soon!</p>
+                        <p style="font-size: 1.2rem; color: #64748b;">Epic adventures are being prepared. Check back soon!</p>
                     </div>
                 `;
                 if (tourSelect) tourSelect.innerHTML = '<option value="">No activities available</option>';
@@ -2940,7 +1373,495 @@
             container.innerHTML = html;
         }
 
+        // Enhanced Calendar Functions
+        function generateCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const monthYear = document.getElementById('monthYear');
+            
+            if (!grid || !monthYear) return;
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            monthYear.textContent = new Date(year, month).toLocaleDateString('en-US', { 
+                month: 'long', 
+                year: 'numeric' 
+            });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+
+            let html = '';
+            
+            // Add day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                html += `<div class="calendar-day header">${day}</div>`;
+            });
+
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                html += `<div class="calendar-day other-month"></div>`;
+            }
+
+            // Add days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dateString = date.toISOString().split('T')[0];
+                const dayEvents = events.filter(event => event.date === dateString);
+                
+                let classes = 'calendar-day';
+                if (date.toDateString() === today.toDateString()) {
+                    classes += ' today';
+                }
+
+                html += `
+                    <div class="${classes}">
+                        <div class="day-number">${day}</div>
+                        ${dayEvents.map(event => '<div class="event-indicator"></div>').join('')}
+                        ${dayEvents.length > 0 ? `<div class="event-count">${dayEvents.length}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            grid.innerHTML = html;
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar();
+        }
+
+        // Enhanced Booking Functions
+        function setMinBookingDate() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const travelDateInput = document.getElementById('travelDate');
+            if (travelDateInput) {
+                travelDateInput.min = tomorrow.toISOString().split('T')[0];
+            }
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            
+            if (!currentUser) {
+                showNotification('Please log in to book an adventure!', 'error');
+                return;
+            }
+
+            const tour = document.getElementById('tourSelect').value;
+            const travelDate = document.getElementById('travelDate').value;
+            const groupSize = document.getElementById('groupSize').value;
+            const paymentCode = document.getElementById('paymentCode').value.trim();
+            const specialRequests = document.getElementById('specialRequests').value.trim();
+
+            if (!tour || !travelDate || !paymentCode) {
+                showNotification('Please fill in all required fields!', 'error');
+                return;
+            }
+
+            const booking = {
+                id: Date.now(),
+                userId: currentUser.id,
+                userName: currentUser.name,
+                userEmail: currentUser.email,
+                tour: tour,
+                travelDate: travelDate,
+                groupSize: parseInt(groupSize),
+                paymentCode: paymentCode,
+                specialRequests: specialRequests,
+                status: 'Pending',
+                bookingDate: new Date().toISOString()
+            };
+
+            bookings.push(booking);
+            saveToStorage();
+
+            document.getElementById('bookingForm').reset();
+            setMinBookingDate();
+            
+            showNotification('Booking submitted successfully! We\'ll verify your payment and get back to you soon. 🎉', 'success');
+            switchTab('bookings');
+            loadUserBookings();
+        }
+
+        function updateBookingStatus(bookingId, status) {
+            const booking = bookings.find(b => b.id == bookingId);
+            if (booking) {
+                booking.status = status;
+                saveToStorage();
+                loadAdminBookings();
+                updateAnalytics();
+                showNotification(`Booking ${status.toLowerCase()} successfully!`, 'success');
+            }
+        }
+
+        // Enhanced User Data Functions
+        function loadUserData() {
+            loadUserBookings();
+            loadUserProfile();
+        }
+
+        function loadUserBookings() {
+    if (!currentUser) return;
+
+    const userBookings = bookings.filter(booking => booking.userId === currentUser.id);
+    const container = document.getElementById('userBookings');
+
+    if (userBookings.length === 0) {
+        container.innerHTML = `
+            <div class="text-center" style="padding: 4rem;">
+                <i class="fas fa-compass" style="font-size: 5rem; color: var(--primary); margin-bottom: 2rem; animation: float 3s ease-in-out infinite;"></i>
+                <h4 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--dark);">No adventures booked yet!</h4>
+                <p style="font-size: 1.3rem; color: #64748b; margin-bottom: 3rem;">Your journey is waiting to begin. Book your first adventure and create unforgettable memories!</p>
+                <a href="#" onclick="switchTab('book-tour')" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 3rem;">
+                    <i class="fas fa-plus"></i> Book Your First Adventure
+                </a>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+    userBookings.forEach(booking => {
+        const statusClass = booking.status.toLowerCase().replace(' ', '-');
+        const statusIcon = booking.status === 'Confirmed' ? 'check-circle' : 
+                         booking.status === 'Rejected' ? 'times-circle' : 'clock';
+        
+        html += `
+            <div class="event-card" style="border-left-color: ${booking.status === 'Confirmed' ? 'var(--success)' : booking.status === 'Rejected' ? 'var(--danger)' : 'var(--warning)'};">
+                <div class="event-header">
+                    <h4 style="font-size: 1.4rem;">${booking.tour}</h4>
+                    <span class="status-badge status-${statusClass}">
+                        <i class="fas fa-${statusIcon}"></i> ${booking.status}
+                    </span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                    <div>
+                        <strong>Travel Date:</strong><br>
+                        <i class="fas fa-calendar"></i> ${new Date(booking.travelDate).toLocaleDateString('en-US', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}
+                    </div>
+                    <div>
+                        <strong>Group Size:</strong><br>
+                        <i class="fas fa-users"></i> ${booking.groupSize} traveler${booking.groupSize > 1 ? 's' : ''}
+                    </div>
+                    <div>
+                        <strong>Payment Code:</strong><br>
+                        <i class="fas fa-mobile-alt"></i> ${booking.paymentCode}
+                    </div>
+                    <div>
+                        <strong>Booked On:</strong><br>
+                        <i class="fas fa-clock"></i> ${new Date(booking.bookingDate).toLocaleDateString()}
+                    </div>
+                </div>
+                ${booking.specialRequests ? `
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--light); border-radius: 15px;">
+                        <strong><i class="fas fa-sticky-note"></i> Special Requests:</strong><br>
+                        ${booking.specialRequests}
+                    </div>
+                ` : ''}
+                ${booking.status === 'Confirmed' ? `
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(5, 150, 105, 0.1); border-radius: 15px; color: var(--success);">
+                        <i class="fas fa-check-circle"></i> <strong>Confirmed!</strong> We'll contact you soon with detailed trip information and packing lists.
+                    </div>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <a href="#" onclick="downloadTicket(${booking.id})" class="download-ticket-btn">
+                            <i class="fas fa-ticket-alt"></i> Download Ticket
+                        </a>
+                    </div>
+                ` : booking.status === 'Rejected' ? `
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(220, 38, 38, 0.1); border-radius: 15px; color: var(--danger);">
+                        <i class="fas fa-exclamation-triangle"></i> <strong>Booking Issue:</strong> Please contact us for more information.
+                    </div>
+                ` : `
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(217, 119, 6, 0.1); border-radius: 15px; color: var(--warning);">
+                        <i class="fas fa-hourglass-half"></i> <strong>Pending Review:</strong> We're verifying your payment and will confirm shortly.
+                    </div>
+                `}
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+        function loadUserProfile() {
+            if (!currentUser) return;
+
+            document.getElementById('fullName').value = currentUser.name || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('phone').value = currentUser.phone || '';
+            document.getElementById('emergencyContact').value = currentUser.emergencyContact || '';
+        }
+
+        function updateProfile(event) {
+            event.preventDefault();
+            
+            if (!currentUser) return;
+
+            currentUser.name = document.getElementById('fullName').value.trim();
+            currentUser.email = document.getElementById('email').value.trim();
+            currentUser.phone = document.getElementById('phone').value.trim();
+            currentUser.emergencyContact = document.getElementById('emergencyContact').value.trim();
+
+            const userIndex = users.findIndex(user => user.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex] = { ...users[userIndex], ...currentUser };
+            }
+            
+            saveToStorage();
+            updateAuthUI();
+            showNotification('Profile updated successfully! 👤', 'success');
+        }
+
+        // Enhanced Admin Data Functions
+        function loadAdminData() {
+            loadAdminActivities();
+            loadAdminEvents();
+            loadAdminBookings();
+            loadAdminUsers();
+            updateAnalytics();
+        }
+
+        function loadAdminBookings() {
+            const tbody = document.getElementById('adminBookingsTable');
+            
+            if (bookings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center" style="padding: 3rem; font-size: 1.1rem; color: #64748b;">No bookings yet. When customers make bookings, they\'ll appear here.</td></tr>';
+                return;
+            }
+
+            let html = '';
+            bookings.forEach(booking => {
+                const statusClass = booking.status.toLowerCase().replace(' ', '-');
+                const activity = activities.find(a => a.name === booking.tour);
+                const price = activity ? parseInt(activity.price) * booking.groupSize : 0;
+                
+                html += `
+                    <tr>
+                        <td><strong style="color: var(--primary);">#${booking.id}</strong></td>
+                        <td>
+                            <div>
+                                <strong style="font-size: 1.05rem;">${booking.userName}</strong><br>
+                                <small style="color: #64748b;">${booking.userEmail}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <strong style="color: var(--dark);">${booking.tour}</strong><br>
+                            <small style="color: var(--primary); font-weight: 600;">KSH ${price.toLocaleString()}</small>
+                        </td>
+                        <td style="font-weight: 600;">${new Date(booking.travelDate).toLocaleDateString()}</td>
+                        <td><i class="fas fa-users"></i> <strong>${booking.groupSize}</strong></td>
+                        <td><code style="background: var(--light); padding: 0.3rem 0.6rem; border-radius: 8px; font-weight: 600;">${booking.paymentCode}</code></td>
+                        <td>
+                            <span class="status-badge status-${statusClass}">
+                                <i class="fas fa-${booking.status === 'Confirmed' ? 'check-circle' : booking.status === 'Rejected' ? 'times-circle' : 'clock'}"></i>
+                                ${booking.status}
+                            </span>
+                        </td>
+                        <td>
+                            ${booking.status === 'Pending' ? `
+                                <div class="action-buttons">
+                                    <button class="btn btn-small btn-success" onclick="updateBookingStatus(${booking.id}, 'Confirmed')" title="Confirm Booking">
+                                        <i class="fas fa-check"></i> Confirm
+                                    </button>
+                                    <button class="btn btn-small btn-danger" onclick="updateBookingStatus(${booking.id}, 'Rejected')" title="Reject Booking">
+                                        <i class="fas fa-times"></i> Reject
+                                    </button>
+                                </div>
+                            ` : `
+                                <span style="color: #64748b; font-size: 0.95rem; font-weight: 500;">
+                                    <i class="fas fa-check"></i> Processed
+                                </span>
+                            `}
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        function loadAdminUsers() {
+            const tbody = document.getElementById('adminUsersTable');
+            
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding: 3rem; font-size: 1.1rem; color: #64748b;">No users registered yet.</td></tr>';
+                return;
+            }
+
+            let html = '';
+            users.forEach(user => {
+                const userBookings = bookings.filter(booking => booking.userId === user.id);
+                const totalSpent = userBookings.reduce((sum, booking) => {
+                    if (booking.status === 'Confirmed') {
+                        const activity = activities.find(a => a.name === booking.tour);
+                        return sum + (activity ? parseInt(activity.price) * booking.groupSize : 0);
+                    }
+                    return sum;
+                }, 0);
+                
+                html += `
+                    <tr>
+                        <td>
+                            <div>
+                                <strong style="font-size: 1.05rem;">${user.name}</strong><br>
+                                <small style="color: #64748b;">ID: ${user.id}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="mailto:${user.email}" style="color: var(--primary); text-decoration: none; font-weight: 500;">${user.email}</a>
+                        </td>
+                        <td>
+                            ${user.phone ? `<a href="tel:${user.phone}" style="color: var(--primary); text-decoration: none; font-weight: 500;">${user.phone}</a>` : '<em style="color: #94a3b8;">Not provided</em>'}
+                        </td>
+                        <td style="font-weight: 500;">${new Date(user.registrationDate).toLocaleDateString()}</td>
+                        <td>
+                            <strong style="color: var(--primary);">${userBookings.length}</strong><br>
+                            <small style="color: var(--success); font-weight: 600;">KSH ${totalSpent.toLocaleString()} spent</small>
+                        </td>
+                        <td>
+                            <span class="status-badge status-confirmed">
+                                <i class="fas fa-check-circle"></i> Active
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        function updateAnalytics() {
+            const totalUsersEl = document.getElementById('totalUsers');
+            const totalActivitiesEl = document.getElementById('totalActivities');
+            const totalBookingsEl = document.getElementById('totalBookings');
+            const pendingBookingsEl = document.getElementById('pendingBookings');
+            const confirmedBookingsEl = document.getElementById('confirmedBookings');
+            const totalRevenueEl = document.getElementById('totalRevenue');
+
+            if (totalUsersEl) totalUsersEl.textContent = users.length;
+            if (totalActivitiesEl) totalActivitiesEl.textContent = activities.length;
+            if (totalBookingsEl) totalBookingsEl.textContent = bookings.length;
+            if (pendingBookingsEl) pendingBookingsEl.textContent = bookings.filter(b => b.status === 'Pending').length;
+            if (confirmedBookingsEl) confirmedBookingsEl.textContent = bookings.filter(b => b.status === 'Confirmed').length;
+            
+            // Calculate total revenue
+            const revenue = bookings.reduce((sum, booking) => {
+                if (booking.status === 'Confirmed') {
+                    const activity = activities.find(a => a.name === booking.tour);
+                    return sum + (activity ? parseInt(activity.price) * booking.groupSize : 0);
+                }
+                return sum;
+            }, 0);
+            
+            if (totalRevenueEl) totalRevenueEl.textContent = `KSH ${revenue.toLocaleString()}`;
+        }
+
         // Enhanced Utility Functions
+        // Add this with your other utility functions
+function generateTicket(booking) {
+    const activity = activities.find(a => a.name === booking.tour);
+    const ticketDate = new Date(booking.travelDate);
+    
+    // Create a simple QR code (in a real app, you would generate a proper QR code)
+    const qrCodeSVG = `
+        <svg width="150" height="150" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+            <rect width="36" height="36" fill="#ffffff"/>
+            <path d="M0 0h4v4H0zm8 0h4v4H8zm8 0h4v4h-4zm8 0h4v4h-4zM0 8h4v4H0zm8 8h4v4H8zm8-8h4v4h-4zm8 0h4v4h-4zM0 16h4v4H0zm8 0h4v4H8zm16 0h4v4h-4zM0 24h4v4H0zm8 0h4v4H8zm8 0h4v4h-4zm8 0h4v4h-4zM16 8h4v4h-4zm0 16h4v4h-4zM24 8h4v4h-4zm-8 8h4v4h-4z" fill="#000000"/>
+        </svg>
+    `;
+
+    const ticketHTML = `
+        <div class="ticket">
+            <div class="ticket-header">
+                <h3>Zetu Adventures</h3>
+                <p>Your Adventure Ticket</p>
+            </div>
+            
+            <div class="ticket-body">
+                <div>
+                    <div class="ticket-info">
+                        <h4>Booking Reference</h4>
+                        <p>#${booking.id}</p>
+                    </div>
+                    
+                    <div class="ticket-info">
+                        <h4>Adventure</h4>
+                        <p>${booking.tour}</p>
+                    </div>
+                    
+                    <div class="ticket-info">
+                        <h4>Date</h4>
+                        <p>${ticketDate.toLocaleDateString('en-US', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</p>
+                    </div>
+                    
+                    <div class="ticket-info">
+                        <h4>Travelers</h4>
+                        <p>${booking.groupSize} ${booking.groupSize > 1 ? 'persons' : 'person'}</p>
+                    </div>
+                </div>
+                
+                <div class="ticket-qr">
+                    ${qrCodeSVG}
+                </div>
+            </div>
+            
+            <div class="ticket-info">
+                <h4>Customer</h4>
+                <p>${booking.userName}</p>
+            </div>
+            
+            <div class="ticket-footer">
+                <p>Present this ticket at the start of your adventure</p>
+                <small>Booking confirmed on ${new Date(booking.bookingDate).toLocaleDateString()}</small>
+            </div>
+        </div>
+    `;
+
+    return ticketHTML;
+}
+
+function downloadTicket(bookingId) {
+    const booking = bookings.find(b => b.id == bookingId);
+    if (!booking) return;
+
+    const ticketHTML = generateTicket(booking);
+    
+    // Create a Blob with the ticket HTML
+    const blob = new Blob([ticketHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create a temporary link to download the file
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Zetu-Adventures-Ticket-${booking.id}.html`;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Clean up
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
+}
         function handleImageUpload(event, previewId) {
             const file = event.target.files[0];
             if (file) {
@@ -3302,400 +2223,4 @@
         });
     </script>
 </body>
-</html>    <!-- Enhanced JavaScript -->
-    <script>
-        // Global variables
-        let currentUser = null;
-        let users = [];
-        let bookings = [];
-        let activities = [];
-        let events = [];
-        let isAdmin = false;
-        let currentDate = new Date();
-        let currentEditingActivity = null;
-        let currentEditingEvent = null;
-
-        // Initialize the app with enhanced features
-        document.addEventListener('DOMContentLoaded', function() {
-            loadDemoData();
-            checkAuthState();
-            generateCalendar();
-            loadActivities();
-            loadEvents();
-            setMinBookingDate();
-            initializeParticles();
-            initializeScrollEffects();
-            
-            // Set hero video fallback with enhanced background
-            const heroVideo = document.querySelector('.hero-video');
-            if (heroVideo) {
-                heroVideo.style.background = 'linear-gradient(135deg, #1e3a8a 0%, #065f46 50%, #10b981 100%)';
-            }
-        });
-
-        // Enhanced Particle System
-        function initializeParticles() {
-            const particlesContainer = document.getElementById('heroParticles');
-            if (!particlesContainer) return;
-
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 4 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Enhanced Scroll Effects
-        function initializeScrollEffects() {
-            const header = document.getElementById('header');
-            
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                
-                // Header scroll effect
-                if (scrolled > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-
-                // Parallax effect for hero background
-                const heroBackground = document.querySelector('.hero-background');
-                if (heroBackground) {
-                    heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-                }
-
-                // Animate elements on scroll
-                const elements = document.querySelectorAll('.stat-card, .activity-card, .event-card');
-                elements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
-                    
-                    if (elementTop < window.innerHeight - elementVisible) {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
-                    }
-                });
-            });
-
-            // Set initial state for animated elements
-            const elements = document.querySelectorAll('.stat-card, .activity-card, .event-card');
-            elements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            });
-        }
-
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        // Enhanced Authentication Functions
-        function signup(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('signupName').value.trim();
-            const email = document.getElementById('signupEmail').value.trim();
-            const phone = document.getElementById('signupPhone').value.trim();
-            const password = document.getElementById('signupPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match!', 'error');
-                return;
-            }
-
-            if (users.find(user => user.email === email)) {
-                showNotification('User with this email already exists!', 'error');
-                return;
-            }
-
-            const newUser = {
-                id: Date.now(),
-                name: name,
-                email: email,
-                phone: phone,
-                password: password,
-                registrationDate: new Date().toISOString(),
-                emergencyContact: '',
-                status: 'active'
-            };
-
-            users.push(newUser);
-            currentUser = newUser;
-            saveToStorage();
-            
-            closeModal('signupModal');
-            updateAuthUI();
-            showDashboard();
-            showNotification('Welcome to Zetu Adventures! Your epic journey begins now! 🎉', 'success');
-        }
-
-        function login(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            const user = users.find(u => u.email === email && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                closeModal('loginModal');
-                updateAuthUI();
-                showDashboard();
-                showNotification(`Welcome back, ${user.name}! Ready for your next adventure? 🌟`, 'success');
-            } else {
-                showNotification('Invalid email or password! Please try again.', 'error');
-            }
-        }
-
-        function adminLogin() {
-            closeModal('loginModal');
-            openModal('adminLoginModal');
-        }
-
-        function adminLoginSubmit(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('adminEmail').value.trim();
-            const password = document.getElementById('adminPassword').value;
-
-            if (email === 'admin@zetuadventures.co.ke' && password === 'admin123') {
-                currentUser = {
-                    id: 'admin',
-                    name: 'Admin',
-                    email: email,
-                    role: 'admin'
-                };
-                isAdmin = true;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                closeModal('adminLoginModal');
-                updateAuthUI();
-                showDashboard();
-                showNotification('Admin access granted! Welcome to the control center! ⚡', 'success');
-            } else {
-                showNotification('Invalid admin credentials!', 'error');
-            }
-        }
-
-        function logout() {
-            currentUser = null;
-            isAdmin = false;
-            localStorage.removeItem('currentUser');
-            updateAuthUI();
-            showHome();
-            showNotification('Successfully logged out. See you on your next adventure! 👋', 'info');
-        }
-
-        function checkAuthState() {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                if (currentUser.role === 'admin') {
-                    isAdmin = true;
-                }
-                updateAuthUI();
-            }
-        }
-
-        function updateAuthUI() {
-            const authButtons = document.getElementById('authButtons');
-            const userMenu = document.getElementById('userMenu');
-            const welcomeText = document.getElementById('welcomeText');
-
-            if (currentUser) {
-                authButtons.classList.add('hidden');
-                userMenu.classList.remove('hidden');
-                welcomeText.textContent = `Welcome, ${currentUser.name}!`;
-            } else {
-                authButtons.classList.remove('hidden');
-                userMenu.classList.add('hidden');
-            }
-        }
-
-        // Enhanced Navigation Functions
-        function showHome() {
-            document.getElementById('homepage').style.display = 'block';
-            document.getElementById('userDashboard').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'none';
-            
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showDashboard() {
-            document.getElementById('homepage').style.display = 'none';
-            
-            if (isAdmin) {
-                document.getElementById('userDashboard').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-                loadAdminData();
-            } else {
-                document.getElementById('userDashboard').style.display = 'block';
-                document.getElementById('adminDashboard').style.display = 'none';
-                loadUserData();
-            }
-            
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Enhanced Modal Functions
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Add animation class
-            setTimeout(() => {
-                modal.classList.add('fade-in');
-            }, 10);
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            modal.classList.remove('fade-in');
-            resetModalForms();
-        }
-
-        function resetModalForms() {
-            document.querySelectorAll('.modal form').forEach(form => form.reset());
-            document.querySelectorAll('.image-preview').forEach(img => img.classList.add('hidden'));
-            currentEditingActivity = null;
-            currentEditingEvent = null;
-            
-            // Reset modal titles
-            const activityTitle = document.getElementById('activityModalTitle');
-            const eventTitle = document.getElementById('eventModalTitle');
-            if (activityTitle) activityTitle.innerHTML = '<i class="fas fa-plus"></i> Add New Activity';
-            if (eventTitle) eventTitle.innerHTML = '<i class="fas fa-plus"></i> Add New Event';
-        }
-
-        // Enhanced Tab Switching Functions
-        function switchTab(tabName) {
-            // Remove active class from all tabs and sections
-            document.querySelectorAll('#userDashboard .dashboard-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('#userDashboard .dashboard-section').forEach(section => section.classList.remove('active'));
-
-            // Add active class to clicked tab and corresponding section
-            event.target.classList.add('active');
-            document.getElementById(tabName + '-section').classList.add('active');
-        }
-
-        function switchAdminTab(tabName) {
-            // Remove active class from all tabs and sections
-            document.querySelectorAll('#adminDashboard .dashboard-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('#adminDashboard .dashboard-section').forEach(section => section.classList.remove('active'));
-
-            // Add active class to clicked tab and corresponding section
-            event.target.classList.add('active');
-            document.getElementById('admin-' + tabName + '-section').classList.add('active');
-
-            if (tabName === 'analytics') {
-                updateAnalytics();
-            }
-        }
-
-        // Enhanced Activity Management Functions
-        function loadActivities() {
-            const activitiesGrid = document.getElementById('activitiesGrid');
-            const tourSelect = document.getElementById('tourSelect');
-            const eventActivitySelect = document.getElementById('eventActivity');
-            
-            if (activities.length === 0) {
-                activitiesGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 5rem;">
-                        <i class="fas fa-mountain" style="font-size: 5rem; color: var(--primary); margin-bottom: 2rem; animation: float 3s ease-in-out infinite;"></i>
-                        <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--dark);">No adventures yet</h3>
-                        <p style="font-size: 1.2rem; color: #64748b; margin-bottom: 3rem;">Epic adventures are being prepared. Check back soon!</p>
-                    </div>
-                `;
-                if (tourSelect) tourSelect.innerHTML = '<option value="">No activities available</option>';
-                if (eventActivitySelect) eventActivitySelect.innerHTML = '<option value="">No activities available</option>';
-                return;
-            }
-
-            let html = '';
-            let selectHtml = '<option value="">Select an adventure...</option>';
-            let eventSelectHtml = '<option value="">Select activity...</option>';
-
-            activities.forEach(activity => {
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button onclick="nextMonth()" title="Next Month">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="calendar-grid" id="calendarGrid">
-                        <!-- Calendar will be generated dynamically -->
-                    </div>
-                </div>
-
-                <div class="upcoming-events">
-                    <h3 style="font-size: 2.5rem; margin-bottom: 3rem; text-align: center; font-weight: 800; color: var(--dark);">
-                        <i class="fas fa-star" style="color: var(--accent);"></i> Upcoming Adventures
-                    </h3>
-                    <div class="events-list" id="eventsList">
-                        <!-- Events will be loaded dynamically -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Enhanced Contact Section -->
-        <section class="activities-section" id="contact">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Get In Touch</h2>
-                    <p class="section-subtitle">Ready for your next adventure? Let's make it happen together!</p>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-phone stat-icon"></i>
-                        <div class="stat-value">24/7</div>
-                        <div class="stat-label">Support Hotline</div>
-                        <p style="margin-top: 1.5rem; color: var(--primary); font-weight: 600; font-size: 1.1rem;">
-                            <a href="tel:+254712345678" style="color: inherit; text-decoration: none;">+254 712 345 678</a><br>
-                            <a href="tel:+254734567890" style="color: inherit; text-decoration: none;">+254 734 567 890</a>
-                        </p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fab fa-whatsapp stat-icon"></i>
-                        <div class="stat-value">WhatsApp</div>
-                        <div class="stat-label">Quick Response</div>
-                        <p style="margin-top: 1.5rem; color: var(--success); font-weight: 600; font-size: 1.1rem;">
-                            <a href="https://wa.me/254712345678" style="color: inherit; text-decoration: none;">+254 712 345 678</a>
-                        </p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-mobile-alt stat-icon"></i>
-                        <div class="stat-value">123456</div>
-                        <div class="stat-label">M-Pesa Till Number</div>
-                        <p style="margin-top: 1.5rem; color: var(--warning); font-weight: 600; font-size: 1.1rem;">
-                            Pay & Submit Code
-                        </p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-envelope stat-icon"></i>
-                        <div class="stat-value">Email</div>
-                        <div class="stat-label">General Inquiries</div>
-                        <p style="margin-top: 1.5rem; color: var(--info); font-weight: 600; font-size: 1.1rem;">
-                            <a href="mailto:info@zetuadventures.co.ke" style="color: inherit; text-decoration: none;">info@zetuadventures.co.ke</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+</html>
